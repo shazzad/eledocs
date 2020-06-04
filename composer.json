@@ -1,0 +1,19 @@
+{
+  "name": "shazzad/wedocs-elementor-integration",
+  "description": "Use elementor to manage wedocs frontend.",
+  "type": "wordpress-plugin",
+  "license": "GPL-2.0+",
+  "authors": [
+    {
+      "name": "Shazzad Hossain Khan",
+      "email": "hello@shazzad.me"
+    }
+  ],
+  "minimum-stability": "dev",
+  "autoload": {
+    "psr-4": {
+      "WeDocs\\Elementor_Integration\\": "includes/"
+    },
+    "files": [ "includes/functions.php" ]
+  }
+}

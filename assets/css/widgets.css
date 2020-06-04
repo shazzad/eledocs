@@ -1,0 +1,33 @@
+.wdei-search-doc{
+	position: relative;
+}
+.wdei-search-form{
+	display: flex;
+	column-gap: 0.5rem;
+}
+.wdei-search-form .field-wrap,
+.wdei-search-form .submit-wrap{
+	flex: 0 0 auto;
+}
+.wdei-search-form .search-field-wrap{
+	flex-grow: 1;
+}
+.wdei-search-doc .results-wrap {
+    left: 0;
+    top: 100%;
+    width: 100%;
+    position: absolute;
+    background: #fff;
+    z-index: 20;
+	display: none;
+    box-shadow: 0px 5px 5px rgba(0,0,0,0.5);
+    padding: 20px 30px;
+}
+.results-open .results-wrap {
+	display: block;
+}
+.wdei-search-doc ul.results{
+	margin: 0;
+	padding: 0;
+	list-style: none outside;
+}
