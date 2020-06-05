@@ -79,11 +79,10 @@ class Elementor_Widgets {
      * Allows plugin assets to be loaded.
      */
     public function register_widgets( $widgets_manager ) {
+		$widgets_manager->register_widget_type( new Widget\Breadcrumbs() );
 		$widgets_manager->register_widget_type( new Widget\Search_Doc() );
 		$widgets_manager->register_widget_type( new Widget\Docs() );
-
 		$widgets_manager->register_widget_type( new Widget\Single_Doc_Sidebar() );
-		$widgets_manager->register_widget_type( new Widget\Breadcrumbs() );
-		$widgets_manager->register_widget_type( new Widget\Single_Doc_Childrens() );
+		$widgets_manager->register_widget_type( new Widget\Single_Doc_Children() );
     }
 }
