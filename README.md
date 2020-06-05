@@ -1,7 +1,10 @@
-# weDocs Elementor Integration
-Use elementor to manage wedocs frontend.
+# EleDocs
+Use Elementor to manage WeDocs frontend.
+Create global template for Single Doc.
+Use 5 Elementor widgets to design you documentation.
 
-## Widget
+
+## Elementor Widget
 * Breadcrumbs.
 * Docs - Landing page, with grid view of docs with sections.
 * Search Doc - Doc search form.

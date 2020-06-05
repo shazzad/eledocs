@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: weDocs Elementor Integration
+Plugin Name: EleDocs
 Plugin URI: https://w4dev.com/
 Description: Use elementor to manage wedocs frontend.
 Version: 1.0.0
@@ -21,9 +21,9 @@ require_once __DIR__ . '/vendor/autoload.php';
 /**
  * WeDocs Elementor Integration class.
  *
- * @class WeDocs_Elementor_Integration The class that holds the entire WeDocs Elementor Integration plugin
+ * @class EleDocs The class that holds the entire WeDocs Elementor Integration plugin
  */
-final class WeDocs_Elementor_Integration {
+final class EleDocs {
 
     /**
      * Plugin version.
@@ -65,16 +65,16 @@ final class WeDocs_Elementor_Integration {
 
 
     /**
-     * Initializes the WeDocs_Elementor_Integration() class.
+     * Initializes the EleDocs() class.
      *
-     * Checks for an existing WeDocs_Elementor_Integration() instance
+     * Checks for an existing EleDocs() instance
      * and if it doesn't find one, creates it.
      */
     public static function init() {
         static $instance = false;
 
         if ( ! $instance ) {
-            $instance = new WeDocs_Elementor_Integration();
+            $instance = new EleDocs();
         }
 
         return $instance;
@@ -126,9 +126,9 @@ final class WeDocs_Elementor_Integration {
      * @return void
      */
     public function init_classes() {
-		$this->container['widgets'] = new WeDocs\Elementor_Integration\Elementor_Widgets();
+		$this->container['elementor'] = new EleDocs\Elementor();
         if ( ! is_admin() ) {
-            $this->container['frontend'] = new WeDocs\Elementor_Integration\Frontend();
+            $this->container['frontend'] = new EleDocs\Frontend();
         }
     }
 
@@ -176,15 +176,15 @@ final class WeDocs_Elementor_Integration {
         return $this->plugin_path() . '/templates/';
     }
 
-} // WeDocs_Elementor_Integration
+} // EleDocs
 
 /**
  * Initialize the plugin.
  *
- * @return \WeDocs_Elementor_Integration
+ * @return \EleDocs
  */
 function wedocs_elementor_integration() {
-    return WeDocs_Elementor_Integration::init();
+    return EleDocs::init();
 }
 
 // kick it off

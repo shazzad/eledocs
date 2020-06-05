@@ -1,5 +1,5 @@
 {
-  "name": "shazzad/wedocs-elementor-integration",
+  "name": "shazzad/eledocs",
   "description": "Use elementor to manage wedocs frontend.",
   "type": "wordpress-plugin",
   "license": "GPL-2.0+",
@@ -12,7 +12,7 @@
   "minimum-stability": "dev",
   "autoload": {
     "psr-4": {
-      "WeDocs\\Elementor_Integration\\": "includes/"
+      "EleDocs\\": "includes/"
     },
     "files": [ "includes/functions.php" ]
   }

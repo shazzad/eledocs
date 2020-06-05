@@ -1,5 +1,5 @@
 <?php
-namespace WeDocs\Elementor_Integration\Widget;
+namespace EleDocs\Widget;
 
 use \Elementor\Widget_Base;
 

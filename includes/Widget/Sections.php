@@ -7,14 +7,14 @@ use \Elementor\Group_Control_Typography;
 use \Elementor\Scheme_Typography;
 use \Elementor\Group_Control_Border;
 
-class Docs extends Widget_Base {
+class Sections extends Widget_Base {
 
 	public function get_name() {
-		return 'wdei-docs';
+		return 'wdei-sections';
 	}
 
 	public function get_title() {
-		return __( 'Docs', 'wedocs-elementor-integration' );
+		return __( 'Sections', 'wedocs-elementor-integration' );
 	}
 
 	public function get_icon() {
@@ -26,17 +26,17 @@ class Docs extends Widget_Base {
 	}
 
 	public function get_keywords() {
-		return [ 'wedocs', 'docs' ];
+		return [ 'wedocs', 'sections' ];
 	}
 
 	protected function _register_controls() {
 		$this->_settings_controls();
-		#$this->_doc_controls();
+		#$this->_section_controls();
 
-		$this->_docs_style_controls();
-		$this->_doc_title_style_controls();
 		$this->_sections_style_controls();
-		$this->_section_style_controls();
+		$this->_section_title_style_controls();
+		$this->_articles_style_controls();
+		$this->_article_style_controls();
 	}
 
 	protected function _settings_controls() {
@@ -49,9 +49,9 @@ class Docs extends Widget_Base {
 		);
 
 		$this->add_control(
-			'show_sections',
+			'show_articles',
 			[
-				'label' => __( 'Show Sections?', 'wedocs-elementor-integration' ),
+				'label' => __( 'Show Articles?', 'wedocs-elementor-integration' ),
 				'type' => Controls_Manager::SWITCHER,
 				'label_on' => __( 'Show', 'wedocs-elementor-integration' ),
 				'label_off' => __( 'Hide', 'wedocs-elementor-integration' ),
@@ -61,14 +61,14 @@ class Docs extends Widget_Base {
 		);
 
 		$this->add_control(
-			'section_items_limit',
+			'article_items_limit',
 			[
-				'label' => __( 'Sections per Doc?', 'wedocs-elementor-integration' ),
-				'description' => __( 'Number of Sections to display per Doc?', 'wedocs-elementor-integration' ),
+				'label' => __( 'Articles per Section?', 'wedocs-elementor-integration' ),
+				'description' => __( 'Number of Articles to display per Section?', 'wedocs-elementor-integration' ),
 				'type' => Controls_Manager::NUMBER,
 				'default' => 20,
 				'condition' => [
-		            'show_sections' => 'yes'
+		            'show_articles' => 'yes'
 		        ],
 			]
 		);
@@ -83,7 +83,7 @@ class Docs extends Widget_Base {
 				'return_value' => 'yes',
 				'default' => 'yes',
 				'condition' => [
-		            'show_sections' => 'yes'
+		            'show_articles' => 'yes'
 		        ]
 			]
 		);
@@ -102,7 +102,7 @@ class Docs extends Widget_Base {
 				    'relation' => 'and',
 				    'terms' => [
 						[
-				            'name' => 'show_sections',
+				            'name' => 'show_articles',
 				            'operator' => '==',
 				            'value' => 'yes'
 				        ],
@@ -118,28 +118,28 @@ class Docs extends Widget_Base {
 
 		$this->end_controls_section();
 	}
-	protected function _doc_controls() {
+	protected function _section_controls() {
 		$this->start_controls_section(
-			'docs_content',
+			'sections_content',
 			[
-				'label' 	=> __('Doc', 'wedocs-elementor-integration'),
+				'label' 	=> __('Section', 'wedocs-elementor-integration'),
 				'tab' 		=> Controls_Manager::TAB_CONTENT,
 			]
 		);
 		$this->end_controls_section();
 	}
 
-	protected function _docs_style_controls() {
+	protected function _sections_style_controls() {
 		$this->start_controls_section(
-			'docs_style',
+			'sections_style',
 			[
-				'label' => __( 'Docs', 'wedocs-elementor-integration' ),
+				'label' => __( 'Sections', 'wedocs-elementor-integration' ),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
 
 		$this->add_control(
-			'docs_alignment', [
+			'sections_alignment', [
 				'label' 			=> __( 'Column Size', 'wedocs-elementor-integration' ),
 				'type' 				=> Controls_Manager::SELECT,
 				'label_block' 		=> true,
@@ -150,7 +150,7 @@ class Docs extends Widget_Base {
 					'flex-end' => __( 'End', 'elementor' ),
 				],
 				'selectors' => [
-					'{{WRAPPER}} .wdei-docs-wrap' => 'justify-content: {{VALUE}};',
+					'{{WRAPPER}} .wdei-sections-wrap' => 'justify-content: {{VALUE}};',
 				]
 			]
 		);
@@ -191,8 +191,8 @@ class Docs extends Widget_Base {
         $this->add_group_control(
 			\Elementor\Group_Control_Border::get_type(),
 			[
-				'name' => 'service_border',
-				'selector' => '{{WRAPPER}} .wdei-doc',
+				'name' => 'section_border',
+				'selector' => '{{WRAPPER}} .wdei-section',
 				'separator' => 'before',
 				'fields_options' => [
 					'border' => [
@@ -208,85 +208,86 @@ class Docs extends Widget_Base {
 						],
 					],
 					'color' => [
-						'default' => '#333'
+						'default' => '#ddd'
 					]
 				]
 			]
 		);
 
 		$this->add_control(
-			'service_border_radius',
+			'section_border_radius',
 			[
 				'label' => __( 'Border Radius', 'elementor' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'separator' => 'before',
 				'size_units' => [ 'px', '%' ],
 				'selectors' => [
-					'{{WRAPPER}} .wdei-doc' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .wdei-section' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'default' => [
 		            'unit' => 'px',
-		            'top' => 0,
-		            'right' => 0,
-		            'bottom' => 0,
-		            'left' => 0,
+		            'top' => 5,
+		            'right' => 5,
+		            'bottom' => 5,
+		            'left' => 5,
 		            'isLinked' => 1
 		        ]
 			]
 		);
 
 		$this->add_control(
-			'service_background_color',
+			'section_background_color',
 			[
 				'label' => __( 'Background Color', 'elementor' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .wdei-doc' => 'background-color: {{VALUE}};',
-				]
+					'{{WRAPPER}} .wdei-section' => 'background-color: {{VALUE}};',
+				],
+				'default' => '#FFF'
 			]
 		);
 		$this->add_group_control(
 			\Elementor\Group_Control_Box_Shadow::get_type(),
 			[
-				'name' => 'service_box_shadow',
-				'selector' => '{{WRAPPER}} .wdei-doc',
+				'name' => 'section_box_shadow',
+				'selector' => '{{WRAPPER}} .wdei-section',
 			]
 		);
 
 		$this->add_responsive_control(
-			'service_padding',
+			'section_padding',
 			[
 				'label' => __( 'Padding', 'elementor' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
-					'{{WRAPPER}} .wdei-doc' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .wdei-section' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'separator' => 'before',
 				'default' => [
 		            'unit' => 'px',
 		            'top' => 20,
-		            'right' => 20,
+		            'right' => 25,
 		            'bottom' => 20,
-		            'left' => 20,
-		            'isLinked' => 1
+		            'left' => 25,
+		            'isLinked' => false
 		        ]
 			]
 		);
 
         $this->end_controls_section();
 	}
-	protected function _doc_title_style_controls()	{
+	protected function _section_title_style_controls()	{
 		$this->start_controls_section(
-			'doc_title_style',
+			'section_title_style',
 			[
-				'label' => __( 'Doc Title', 'wedocs-elementor-integration' ),
+				'label' => __( 'Section Title', 'wedocs-elementor-integration' ),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
 
 		$this->add_control(
-			'doc_title_text_alignment',
+			'section_title_text_alignment',
 			[
 				'label' => __( 'Text Alignment', 'elementor' ),
 				'type' => Controls_Manager::CHOOSE,
@@ -309,7 +310,7 @@ class Docs extends Widget_Base {
 		);
 
 		$this->add_responsive_control(
-			'doc_title_min_height', [
+			'section_title_min_height', [
 				'label' => __( 'Minimum Height', 'wedocs-elementor-integration' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
@@ -325,13 +326,13 @@ class Docs extends Widget_Base {
 					'size' => 0,
 				],
 				'selectors' => [
-					'{{WRAPPER}} .doc-title' => 'min-height: {{SIZE || 0}}{{UNIT}};',
+					'{{WRAPPER}} .section-title' => 'min-height: {{SIZE || 0}}{{UNIT}};',
 				],
 			]
 		);
 
 		$this->add_control(
-			'doc_title_tag',
+			'section_title_tag',
 			[
 				'label' => __( 'HTML Tag', 'elementor' ),
 				'type' => Controls_Manager::SELECT,
@@ -351,9 +352,9 @@ class Docs extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-				'name' => 'doc_title_text_typography',
+				'name' => 'section_title_text_typography',
 				'label' => __('Typography'),
-				'selector' => '{{WRAPPER}} .doc-title',
+				'selector' => '{{WRAPPER}} .section-title',
 				'fields_options' => [
 				]
 			]
@@ -362,66 +363,99 @@ class Docs extends Widget_Base {
         $this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
-				'name' => 'doc_title_border',
-				'selector' => '{{WRAPPER}} .doc-title',
-				'separator' => 'before'
+				'name' => 'section_title_border',
+				'selector' => '{{WRAPPER}} .section-title',
+				'separator' => 'before',
+				'fields_options' => [
+					'border' => [
+						'default' => 'solid',
+					],
+					'width' => [
+						'default' => [
+							'top' => '0',
+							'right' => '0',
+							'bottom' => '1',
+							'left' => '0',
+							'isLinked' => false,
+						],
+					],
+					'color' => [
+						'default' => '#ddd'
+					]
+				]
 			]
 		);
 
         $this->add_control(
-			'doc_title_text_color',
+			'section_title_text_color',
 			[
 				'label' => __( 'Text Color', 'elementor' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .doc-title a' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .section-title a' => 'color: {{VALUE}};',
 				],
 			]
 		);
 		$this->add_control(
-			'doc_title_background_color',
+			'section_title_background_color',
 			[
 				'label' => __( 'Background Color', 'elementor' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .doc-title' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .section-title' => 'background-color: {{VALUE}};',
 				]
 			]
 		);
 
 		$this->add_responsive_control(
-			'doc_title_padding',
+			'section_title_padding',
 			[
 				'label' => __( 'Padding', 'elementor' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'separator' => 'before',
 				'selectors' => [
-					'{{WRAPPER}} .doc-title' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				]
+					'{{WRAPPER}} .section-title' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'default' => [
+		            'unit' => 'px',
+		            'top' => 0,
+		            'right' => 0,
+		            'bottom' => 10,
+		            'left' => 0,
+		            'isLinked' => false
+		        ]
 			]
 		);
 
 		$this->add_responsive_control(
-			'doc_title_margin',
+			'section_title_margin',
 			[
 				'label' => __( 'Margin', 'elementor' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'separator' => 'before',
 				'selectors' => [
-					'{{WRAPPER}} .doc-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				]
+					'{{WRAPPER}} .section-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'default' => [
+		            'unit' => 'px',
+		            'top' => 0,
+		            'right' => 0,
+		            'bottom' => 10,
+		            'left' => 0,
+		            'isLinked' => false
+		        ]
 			]
 		);
 
         $this->end_controls_section();
 	}
-	protected function _sections_style_controls() {
+	protected function _articles_style_controls() {
 		$this->start_controls_section(
-			'sections_style',
+			'articles_style',
 			[
-				'label' => __( 'Sections', 'tcmc' ),
+				'label' => __( 'Articles', 'tcmc' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -429,45 +463,45 @@ class Docs extends Widget_Base {
 		$this->add_group_control(
 			\Elementor\Group_Control_Border::get_type(),
 			[
-				'name' => 'doc_sections_border',
-				'selector' => '{{WRAPPER}} .doc-sections',
+				'name' => 'articles_border',
+				'selector' => '{{WRAPPER}} .section-articles',
 				'separator' => 'before'
 			]
 		);
 
 		$this->add_control(
-			'doc_sections_background_color',
+			'articles_background_color',
 			[
 				'label' => __( 'Background Color', 'elementor' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .doc-sections' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .section-articles' => 'background-color: {{VALUE}};',
 				]
 			]
 		);
 
 		$this->add_responsive_control(
-			'doc_sections_padding',
+			'articles_padding',
 			[
 				'label' => __( 'Padding', 'elementor' ),
 				'type' => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'separator' => 'before',
 				'selectors' => [
-					'{{WRAPPER}} .doc-sections' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .section-articles' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				]
 			]
 		);
 
 		$this->add_responsive_control(
-			'doc_sections_margin',
+			'articles_margin',
 			[
 				'label' => __( 'Margin', 'elementor' ),
 				'type' => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'separator' => 'before',
 				'selectors' => [
-					'{{WRAPPER}} .doc-sections' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .section-articles' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'default' => [
 					'unit' => 'px',
@@ -482,17 +516,17 @@ class Docs extends Widget_Base {
 
 		$this->end_controls_section();
 	}
-	protected function _section_style_controls() {
+	protected function _article_style_controls() {
 		$this->start_controls_section(
-			'section_style',
+			'article_style',
 			[
-				'label' => __( 'Section', 'tcmc' ),
+				'label' => __( 'Article', 'tcmc' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
 
 		$this->add_control(
-			'doc_section_text_alignment',
+			'article_text_alignment',
 			[
 				'label' => __( 'Text Alignment', 'elementor' ),
 				'type' => \Elementor\Controls_Manager::CHOOSE,
@@ -517,40 +551,40 @@ class Docs extends Widget_Base {
 		$this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
 			[
-				'name' => 'doc_section_text_typography',
+				'name' => 'article_text_typography',
 				'label' => __('Text typography'),
-				'selector' => '{{WRAPPER}} .doc-section',
+				'selector' => '{{WRAPPER}} .section-article',
 				'fields_options' => [
 				]
 			]
 		);
 
 		$this->add_control(
-			'doc_section_text_color',
+			'article_text_color',
 			[
 				'label' => __( 'Text Color', 'elementor' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .doc-section, {{WRAPPER}} .doc-section a' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .section-article, {{WRAPPER}} .section-article a' => 'color: {{VALUE}};',
 				],
 			]
 		);
 
 		$this->add_responsive_control(
-			'doc_section_margin',
+			'article_margin',
 			[
 				'label' => __( 'Margin', 'elementor' ),
 				'type' => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'separator' => 'before',
 				'selectors' => [
-					'{{WRAPPER}} .doc-section' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .section-article' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'default' => [
 					'unit' => 'px',
 					'top' => 0,
 					'right' => 0,
-					'bottom' => 20,
+					'bottom' => 5,
 					'left' => 0,
 					'isLinked' => false
 				]
@@ -563,12 +597,13 @@ class Docs extends Widget_Base {
 	protected function render() {
 		$settings = $this->get_settings_for_display();
 
-        $docs = $this->get_docs();
+		global $post;
+        $sections = $this->get_sections( $post->ID );
 
 		$this->add_render_attribute(
 			'wrapper',
 			'class',
-			sprintf( 'elementor-container elementor-column-gap-%s wdei-docs-container', $settings[ 'column_gap' ] )
+			sprintf( 'elementor-container elementor-column-gap-%s wdei-sections-container', $settings[ 'column_gap' ] )
 		);
 
 		$this->add_render_attribute(
@@ -578,51 +613,51 @@ class Docs extends Widget_Base {
 		);
 
 		$this->add_render_attribute(
-			'doc',
+			'section',
 			'class',
-			'wdei-doc'
+			'wdei-section'
 		);
 
 		$this->add_render_attribute(
-			'doc-title',
+			'section-title',
 			'class',
-			sprintf( 'doc-title elementor-align-%s', $settings[ 'doc_title_text_alignment' ] )
+			sprintf( 'section-title elementor-align-%s', $settings[ 'section_title_text_alignment' ] )
 		);
 
 		$this->add_render_attribute(
-			'doc-sections',
+			'section-articles',
 			'class',
-			'doc-sections'
+			'section-articles'
 		);
 
 		$this->add_render_attribute(
-			'doc-section',
+			'section-article',
 			'class',
-			sprintf( 'doc-section elementor-align-%s', $settings[ 'doc_section_text_alignment' ] )
+			sprintf( 'section-article elementor-align-%s', $settings[ 'article_text_alignment' ] )
 		);
 
 		?>
 		<div <?php echo $this->get_render_attribute_string( 'wrapper' ); ?>>
-			<div class="elementor-row elementor-widget-wrap wdei-docs-wrap">
+			<div class="elementor-row elementor-widget-wrap wdei-sections-wrap">
 			<?php
-			foreach ( $docs as $doc ) {
+			foreach ( $sections as $section ) {
 				?>
 				<div <?php echo $this->get_render_attribute_string( 'column' ); ?>>
 					<div class="elementor-column-wrap elementor-element-populated">
-						<div <?php echo $this->get_render_attribute_string( 'doc' ); ?>>
-							<<?php echo $settings['doc_title_tag']; ?> <?php echo $this->get_render_attribute_string( 'doc-title' ); ?>>
-								<a href="<?php echo get_permalink( $doc->ID ); ?>"><?php echo $doc->post_title; ?></a>
-							</<?php echo $settings['doc_title_tag']; ?>>
+						<div <?php echo $this->get_render_attribute_string( 'section' ); ?>>
+							<<?php echo $settings['section_title_tag']; ?> <?php echo $this->get_render_attribute_string( 'section-title' ); ?>>
+								<a href="<?php echo get_permalink( $section->ID ); ?>"><?php echo $section->post_title; ?></a>
+							</<?php echo $settings['section_title_tag']; ?>>
 
 			                <?php
-							if ( $settings['show_sections'] ) {
-								$sections = $this->get_sections( $doc->ID, $settings['section_items_limit'] );
-								if ( ! empty( $sections ) ) {
+							if ( $settings['show_articles'] ) {
+								$articles = $this->get_articles( $section->ID, $settings['article_items_limit'] );
+								if ( ! empty( $articles ) ) {
 									?>
-									<ul <?php echo $this->get_render_attribute_string( 'doc-sections' ); ?>>
-		                            <?php foreach ( $sections as $section ) { ?>
-		                                <li <?php echo $this->get_render_attribute_string( 'doc-section' ); ?>>
-											<a href="<?php echo get_permalink( $section->ID ); ?>"><?php echo $section->post_title; ?></a>
+									<ul <?php echo $this->get_render_attribute_string( 'section-articles' ); ?>>
+		                            <?php foreach ( $articles as $article ) { ?>
+		                                <li <?php echo $this->get_render_attribute_string( 'section-article' ); ?>>
+											<a href="<?php echo get_permalink( $article->ID ); ?>"><?php echo $article->post_title; ?></a>
 										</li>
 		                            <?php } ?>
 			                        </ul>
@@ -632,8 +667,8 @@ class Docs extends Widget_Base {
 
 							if ( $settings['show_more_button'] ) {
 								?>
-				                <div class="wedocs-doc-link">
-				                    <a href="<?php echo get_permalink( $doc->ID ); ?>"><?php echo $settings['more_button_text']; ?></a>
+				                <div class="wedocs-section-link">
+				                    <a href="<?php echo get_permalink( $section->ID ); ?>"><?php echo $settings['more_button_text']; ?></a>
 				                </div>
 								<?php
 							}
@@ -649,18 +684,18 @@ class Docs extends Widget_Base {
 		<?php
 	}
 
-	private function get_docs() {
-        $docs_args = [
+	private function get_sections( $doc_id = 0 ) {
+        $sections_args = [
             'post_type'   => 'docs',
-            'parent'      => 0,
+            'parent'      => $doc_id,
             'sort_column' => 'menu_order',
         ];
 
-        return get_pages( $docs_args );
+        return get_pages( $sections_args );
 	}
-	private function get_sections( $doc_id, $limit = 20 ) {
+	private function get_articles( $section_id, $limit = 20 ) {
 		return get_children( [
-			'post_parent'    => $doc_id,
+			'post_parent'    => $section_id,
 			'post_type'      => 'docs',
 			'post_status'    => 'publish',
 			'orderby'        => 'menu_order',

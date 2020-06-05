@@ -1,11 +1,11 @@
 <?php
 
-namespace WeDocs\Elementor_Integration;
+namespace EleDocs;
 
 /**
  * Frontend Handler Class
  */
-class Elementor_Widgets {
+class Elementor {
 
     /**
      * Class Constructor
@@ -20,7 +20,19 @@ class Elementor_Widgets {
 
 		// register scripts
 		add_action( 'elementor/frontend/after_register_scripts', [ $this, 'widget_scripts' ] );
+
+		// register dynamic tags
+		add_action( 'elementor/dynamic_tags/register_tags', [ $this, 'register_tags' ] );
     }
+
+	public function register_tags( $dynamic_tags ) {
+		\Elementor\Plugin::$instance->dynamic_tags->register_group(
+			'eledocs', [
+				'title' => 'EleDocs'
+			]
+		);
+		$dynamic_tags->register_tag( 'EleDocs\DynamicTag\Doc_Title' );
+	}
 
 	/**
      * Enqueue admin scripts.
@@ -82,6 +94,7 @@ class Elementor_Widgets {
 		$widgets_manager->register_widget_type( new Widget\Breadcrumbs() );
 		$widgets_manager->register_widget_type( new Widget\Search_Doc() );
 		$widgets_manager->register_widget_type( new Widget\Docs() );
+		$widgets_manager->register_widget_type( new Widget\Sections() );
 		$widgets_manager->register_widget_type( new Widget\Single_Doc_Sidebar() );
 		$widgets_manager->register_widget_type( new Widget\Single_Doc_Children() );
     }

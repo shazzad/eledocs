@@ -1,6 +1,6 @@
 <?php
 
-namespace WeDocs\Elementor_Integration;
+namespace EleDocs;
 
 /**
  * Frontend Handler Class

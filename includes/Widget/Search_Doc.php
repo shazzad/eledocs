@@ -1,5 +1,5 @@
 <?php
-namespace WeDocs\Elementor_Integration\Widget;
+namespace EleDocs\Widget;
 
 use \Elementor\Widget_Base;
 use \Elementor\Controls_Manager;
@@ -122,7 +122,7 @@ class Search_Doc extends Widget_Base {
 			        $parent = $post->ID;
 			    }
 
-				$dropdown_html = '<input type="hidden" name="search_in_doc" value="'. $parent .'" />';
+				$dropdown_html = '<input type="hidden" class="doc-id" name="search_in_doc" value="'. $parent .'" />';
 			}
 		}
 
