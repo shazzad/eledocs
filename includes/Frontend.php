@@ -13,7 +13,7 @@ class Frontend {
     function __construct() {
 
         // Loads frontend scripts and styles
-        # add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
+        # add_filter( 'wedocs_breadcrumbs_html', [ $this, 'breadcrumbs_html' ], 20  );
 
         // override the theme template
         add_filter( 'template_include', [ $this, 'template_loader' ], 21 );
@@ -28,14 +28,8 @@ class Frontend {
      * @uses wp_localize_script()
      * @uses wp_enqueue_style
      */
-    public function enqueue_scripts() {
-        // All styles goes here
-        wp_enqueue_style(
-			'wdei-styles',
-			WDEI_ASSETS . '/css/frontend.css',
-			[],
-			filemtime( WDEI_PATH . '/assets/css/frontend.css' )
-		);
+    public function breadcrumbs_html( $html ) {
+        return str_replace( 'class="wedocs-breadcrumb"', 'class="wdei-breadcrumb"', $html );
     }
 
     /**

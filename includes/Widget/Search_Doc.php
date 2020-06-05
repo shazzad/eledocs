@@ -11,7 +11,7 @@ class Search_Doc extends Widget_Base {
 	}
 
 	public function get_title() {
-		return __( 'Search Doc', 'plugin-name' );
+		return __( 'Search Doc', 'wedocs-elementor-integration' );
 	}
 
 	public function get_icon() {
@@ -44,8 +44,8 @@ class Search_Doc extends Widget_Base {
 			[
 				'label' => __( 'Show Docs Dropdown?', 'wedocs-elementor-integration' ),
 				'type' => Controls_Manager::SWITCHER,
-				'label_on' => __( 'Show', 'your-plugin' ),
-				'label_off' => __( 'Hide', 'your-plugin' ),
+				'label_on' => __( 'Show', 'wedocs-elementor-integration' ),
+				'label_off' => __( 'Hide', 'wedocs-elementor-integration' ),
 				'return_value' => 'yes',
 				'default' => 'yes',
 			]
@@ -113,15 +113,17 @@ class Search_Doc extends Widget_Base {
 		} else {
 			global $post;
 
-			if ( $post->post_parent ) {
-		        $ancestors = get_post_ancestors( $post->ID );
-		        $root      = count( $ancestors ) - 1;
-		        $parent    = $ancestors[$root];
-		    } else {
-		        $parent = $post->ID;
-		    }
+			if ( $post->post_type === 'docs' ) {
+				if ( $post->post_parent ) {
+			        $ancestors = get_post_ancestors( $post->ID );
+			        $root      = count( $ancestors ) - 1;
+			        $parent    = $ancestors[$root];
+			    } else {
+			        $parent = $post->ID;
+			    }
 
-			$dropdown_html = '<input type="hidden" name="search_in_doc" value="'. $parent .'" />';
+				$dropdown_html = '<input type="hidden" name="search_in_doc" value="'. $parent .'" />';
+			}
 		}
 
 		$this->add_render_attribute( 'wrapper', 'class', 'wdei-search-doc' );

@@ -9,7 +9,7 @@
     e.preventDefault();
     var $parent = $(this).closest('.wdei-search-doc');
     var query = $parent.find('.search-input').val();
-    var docId = $parent.find('.doc-id').val();
+    var docId = $parent.find('.doc-id').length > 0 ? $parent.find('.doc-id').val() : 0;
 
     $parent.addClass('results-open').find('.results, .notice').empty().hide();
 

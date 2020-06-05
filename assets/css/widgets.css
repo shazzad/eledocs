@@ -31,3 +31,39 @@
 	padding: 0;
 	list-style: none outside;
 }
+
+.wdei-docs-container .wdei-doc{
+	flex-direction: column;
+}
+@media (min-width: 768px) {
+	.wdei-docs-container .wdei-doc{
+		width: 100%;
+		position: relative;
+		min-height: 1px;
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display: flex;
+	}
+	.wdei-docs-container .doc-sections{
+		flex-grow: 1;
+	}
+}
+
+
+.wdei-breadcrumbs-container ol.wedocs-breadcrumb {
+  margin-bottom: 0;
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+.wdei-breadcrumbs-container ol.wedocs-breadcrumb li {
+  display: inline;
+}
+.wdei-breadcrumbs-container ol.wedocs-breadcrumb li.delimiter {
+  color: #999;
+  margin: 0 2px;
+}
+.wdei-breadcrumbs-container ol.wedocs-breadcrumb a {
+  text-decoration: none;
+}
