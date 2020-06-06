@@ -6,7 +6,7 @@ use \Elementor\Widget_Base;
 class Single_Doc_Children extends Widget_Base {
 
 	public function get_name() {
-		return 'wdei-single-doc-children';
+		return 'eledocs-single-doc-children';
 	}
 
 	public function get_title() {
@@ -18,7 +18,7 @@ class Single_Doc_Children extends Widget_Base {
 	}
 
 	public function get_categories() {
-		return [ 'wedocs-elementor-integration' ];
+		return [ 'eledocs' ];
 	}
 
 	public function get_keywords() {
@@ -31,7 +31,7 @@ class Single_Doc_Children extends Widget_Base {
 		$this->add_render_attribute(
 			'wrapper',
 			'class',
-			'wdei-single-doc-children-container'
+			'eledocs-single-doc-children-container'
 		);
 
 		$children = wp_list_pages( 'title_li=&order=menu_order&parent=' . $post->ID . '&echo=0&post_type=' . $post->post_type );

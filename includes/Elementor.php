@@ -46,28 +46,28 @@ class Elementor {
     public function widget_scripts() {
         // All styles goes here
         wp_enqueue_style(
-			'wdei-widgets',
+			'eledocs-widgets',
 			WDEI_ASSETS . '/css/widgets.css',
 			[],
 			filemtime( WDEI_PATH . '/assets/css/widgets.css' )
 		);
 
 		wp_register_script(
-			'wdei-widgets',
+			'eledocs-widgets',
 			WDEI_ASSETS . '/js/widgets.js',
 			[ 'jquery' ],
 			filemtime( WDEI_PATH . '/assets/js/widgets.js' ),
 			true
 		);
 
-		wp_localize_script( 'wdei-widgets', 'wdeiSearchDoc', [
+		wp_localize_script( 'eledocs-widgets', 'eledocsSearchDoc', [
 			'apiUrl' => rest_url( 'wp/v2/docs/search' ),
-			'noKeywords' => __( 'Please enter something' ),
-			'noResults' => __( 'Nothing found! Try with another keyword!' ),
-			'loadingResults' => __( 'Loading results, please wait.' )
+			'noKeywords' => __( 'Please enter something', 'eledocs' ),
+			'noResults' => __( 'Nothing found! Try with another keyword!', 'eledocs' ),
+			'loadingResults' => __( 'Loading results, please wait.', 'eledocs' )
 		] );
 
-		wp_enqueue_script( 'wdei-widgets' );
+		wp_enqueue_script( 'eledocs-widgets' );
     }
 
     /**
@@ -77,9 +77,9 @@ class Elementor {
      */
     public function register_widget_categories( $elements_manager ) {
 		$elements_manager->add_category(
-			'wedocs-elementor-integration',
+			'eledocs',
 			[
-				'title' => __( 'WeDocs', 'wedocs-elementor-integration' ),
+				'title' => __( 'WeDocs', 'eledocs' ),
 				'icon' => 'fa fa-plug',
 			]
 		);
@@ -95,7 +95,7 @@ class Elementor {
 		$widgets_manager->register_widget_type( new Widget\Search_Doc() );
 		$widgets_manager->register_widget_type( new Widget\Docs() );
 		$widgets_manager->register_widget_type( new Widget\Sections() );
-		$widgets_manager->register_widget_type( new Widget\Single_Doc_Sidebar() );
+		$widgets_manager->register_widget_type( new Widget\Article_Sidebar() );
 		$widgets_manager->register_widget_type( new Widget\Single_Doc_Children() );
     }
 }

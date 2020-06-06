@@ -6,11 +6,11 @@ use \Elementor\Widget_Base;
 class Breadcrumbs extends Widget_Base {
 
 	public function get_name() {
-		return 'wdei-breadcrumbs';
+		return 'eledocs-breadcrumbs';
 	}
 
 	public function get_title() {
-		return __( 'Docs Breadcrumbs', 'wedocs-elementor-integration' );
+		return __( 'Docs Breadcrumbs', 'eledocs' );
 	}
 
 	public function get_icon() {
@@ -18,7 +18,7 @@ class Breadcrumbs extends Widget_Base {
 	}
 
 	public function get_categories() {
-		return [ 'wedocs-elementor-integration' ];
+		return [ 'eledocs' ];
 	}
 
 	public function get_keywords() {
@@ -29,7 +29,7 @@ class Breadcrumbs extends Widget_Base {
 		$this->add_render_attribute(
 			'wrapper',
 			'class',
-			'wdei-breadcrumbs-container'
+			'eledocs-breadcrumbs-container'
 		);
 
 		?>

@@ -1,18 +1,18 @@
-.wdei-search-doc{
+.eledocs-search-doc{
 	position: relative;
 }
-.wdei-search-form{
+.eledocs-search-form{
 	display: flex;
 	column-gap: 0.5rem;
 }
-.wdei-search-form .field-wrap,
-.wdei-search-form .submit-wrap{
+.eledocs-search-form .field-wrap,
+.eledocs-search-form .submit-wrap{
 	flex: 0 0 auto;
 }
-.wdei-search-form .search-field-wrap{
+.eledocs-search-form .search-field-wrap{
 	flex-grow: 1;
 }
-.wdei-search-doc .results-wrap {
+.eledocs-search-doc .results-wrap {
     left: 0;
     top: 100%;
     width: 100%;
@@ -26,26 +26,23 @@
 .results-open .results-wrap {
 	display: block;
 }
-.wdei-search-doc ul.results{
+.eledocs-search-doc ul.results{
 	margin: 0;
 	padding: 0;
 	list-style: none outside;
 }
 
-.wdei-sections-container .section-articles{
-	margin: 0;
-	padding: 0;
-	list-style: none outside;
-}
-
-.wdei-docs-container .wdei-doc,
-.wdei-sections-container .wdei-section{
+.eledocs-parent-children-container .eledocs-parent{
+	width: 100%;
 	flex-direction: column;
 }
+.eledocs-parent-children-container .children{
+	margin: 0;
+	padding: 0;
+	list-style: none outside;
+}
 @media (min-width: 768px) {
-	.wdei-docs-container .wdei-doc,
-	.wdei-sections-container .wdei-section{
-		width: 100%;
+	.eledocs-parent-children-container .eledocs-parent{
 		position: relative;
 		min-height: 1px;
 		display: -webkit-box;
@@ -53,26 +50,25 @@
 		display: -ms-flexbox;
 		display: flex;
 	}
-	.wdei-docs-container .doc-sections,
-	.wdei-sections-container .doc-articles{
+	.eledocs-parent-children-container .eledocs-child{
 		flex-grow: 1;
 	}
 }
 
 
-.wdei-breadcrumbs-container ol.wedocs-breadcrumb {
+.eledocs-breadcrumbs-container ol.wedocs-breadcrumb {
   margin-bottom: 0;
   list-style: none;
   margin-left: 0;
   padding-left: 0;
 }
-.wdei-breadcrumbs-container ol.wedocs-breadcrumb li {
+.eledocs-breadcrumbs-container ol.wedocs-breadcrumb li {
   display: inline;
 }
-.wdei-breadcrumbs-container ol.wedocs-breadcrumb li.delimiter {
+.eledocs-breadcrumbs-container ol.wedocs-breadcrumb li.delimiter {
   color: #999;
   margin: 0 2px;
 }
-.wdei-breadcrumbs-container ol.wedocs-breadcrumb a {
+.eledocs-breadcrumbs-container ol.wedocs-breadcrumb a {
   text-decoration: none;
 }

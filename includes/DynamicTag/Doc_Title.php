@@ -12,7 +12,7 @@ class Doc_Title extends Tag {
 	}
 
 	public function get_title() {
-		return __( 'Doc Title', 'wedocs-elementor-integration' );
+		return __( 'Doc Title', 'eledocs' );
 	}
 
 	public function get_group() {

@@ -7,11 +7,11 @@ use \Elementor\Controls_Manager;
 class Search_Doc extends Widget_Base {
 
 	public function get_name() {
-		return 'wdei-search-doc';
+		return 'eledocs-search-doc';
 	}
 
 	public function get_title() {
-		return __( 'Search Doc', 'wedocs-elementor-integration' );
+		return __( 'Search Doc', 'eledocs' );
 	}
 
 	public function get_icon() {
@@ -19,7 +19,7 @@ class Search_Doc extends Widget_Base {
 	}
 
 	public function get_categories() {
-		return [ 'wedocs-elementor-integration' ];
+		return [ 'eledocs' ];
 	}
 
 	public function get_keywords() {
@@ -42,10 +42,10 @@ class Search_Doc extends Widget_Base {
 		$this->add_control(
 			'show_docs_dropdown',
 			[
-				'label' => __( 'Show Docs Dropdown?', 'wedocs-elementor-integration' ),
+				'label' => __( 'Show Docs Dropdown?', 'eledocs' ),
 				'type' => Controls_Manager::SWITCHER,
-				'label_on' => __( 'Show', 'wedocs-elementor-integration' ),
-				'label_off' => __( 'Hide', 'wedocs-elementor-integration' ),
+				'label_on' => __( 'Show', 'eledocs' ),
+				'label_off' => __( 'Hide', 'eledocs' ),
 				'return_value' => 'yes',
 				'default' => 'yes',
 			]
@@ -54,9 +54,9 @@ class Search_Doc extends Widget_Base {
 		$this->add_control(
 			'docs_dropdown_label',
 			[
-				'label' => __( 'Docs Dropdown Label', 'wedocs-elementor-integration' ),
+				'label' => __( 'Docs Dropdown Label', 'eledocs' ),
 				'type' => Controls_Manager::TEXT,
-				'default' => __( 'All Docs', 'wedocs-elementor-integration' ),
+				'default' => __( 'All Docs', 'eledocs' ),
 				'condition' => [
 		            'show_docs_dropdown' => 'yes'
 		        ],
@@ -67,9 +67,9 @@ class Search_Doc extends Widget_Base {
 		$this->add_control(
 			'search_placeholder_text',
 			[
-				'label' => __( 'Search Placeholder Text', 'wedocs-elementor-integration' ),
+				'label' => __( 'Search Placeholder Text', 'eledocs' ),
 				'type' => Controls_Manager::TEXT,
-				'default' => __( 'Documentation Search &hellip;', 'wedocs-elementor-integration' ),
+				'default' => __( 'Documentation Search &hellip;', 'eledocs' ),
 				'label_block' => true,
 			]
 		);
@@ -77,9 +77,9 @@ class Search_Doc extends Widget_Base {
 		$this->add_control(
 			'search_button_text',
 			[
-				'label' => __( 'Search Button Text', 'wedocs-elementor-integration' ),
+				'label' => __( 'Search Button Text', 'eledocs' ),
 				'type' => Controls_Manager::TEXT,
-				'default' => __( 'Search', 'wedocs-elementor-integration' ),
+				'default' => __( 'Search', 'eledocs' ),
 				'label_block' => true,
 			]
 		);
@@ -107,7 +107,7 @@ class Search_Doc extends Widget_Base {
 	            $dropdown_args['selected'] = (int) $_GET['search_in_doc'];
 	        }
 
-			$dropdown_html = '<div class="wdei-field docs-dropdown-field-wrap">
+			$dropdown_html = '<div class="eledocs-field docs-dropdown-field-wrap">
             ' . wp_dropdown_pages( $dropdown_args ) . '
             </div>';
 		} else {
@@ -126,9 +126,9 @@ class Search_Doc extends Widget_Base {
 			}
 		}
 
-		$this->add_render_attribute( 'wrapper', 'class', 'wdei-search-doc' );
+		$this->add_render_attribute( 'wrapper', 'class', 'eledocs-search-doc' );
 
-		$this->add_render_attribute( 'form', 'class', 'wdei-form wdei-search-form' );
+		$this->add_render_attribute( 'form', 'class', 'eledocs-form eledocs-search-form' );
 		$this->add_render_attribute( 'form', 'role', 'search' );
 		$this->add_render_attribute( 'form', 'method', 'get' );
 		$this->add_render_attribute( 'form', 'action', esc_url( home_url( '/' ) ) );
