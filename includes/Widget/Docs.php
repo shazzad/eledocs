@@ -20,7 +20,7 @@ class Docs extends Parent_Child_Grid {
 	}
 
 	public function get_keywords() {
-		return [ 'wedocs', 'docs' ];
+		return [ 'wedocs', 'eledocs', 'doc' ];
 	}
 
 	protected function get_control_label( $key ) {

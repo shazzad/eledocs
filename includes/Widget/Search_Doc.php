@@ -23,7 +23,7 @@ class Search_Doc extends Widget_Base {
 	}
 
 	public function get_keywords() {
-		return [ 'wedocs', 'search' ];
+		return [ 'wedocs', 'eledocs', 'search', 'form' ];
 	}
 
 	protected function _register_controls() {

@@ -22,7 +22,7 @@ class Single_Doc_Children extends Widget_Base {
 	}
 
 	public function get_keywords() {
-		return [ 'wedocs', 'children' ];
+		return [ 'wedocs', 'eledocs', 'children' ];
 	}
 
 	protected function render() {

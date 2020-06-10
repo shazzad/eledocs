@@ -41,8 +41,8 @@ class Frontend {
      * @return string
      */
     public function template_loader( $template ) {
-        if ( is_single() && get_post_type() == 'docs' ) {
-			$template = wedocs_elementor_integration()->template_path() . 'single-docs.php';
+        if ( is_single() && get_post_type() == 'docs' && elementor_location_exits( 'single', true ) ) {
+			$template = eledocs()->template_path() . 'single-docs.php';
         }
 
         return $template;

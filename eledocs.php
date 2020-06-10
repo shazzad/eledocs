@@ -2,190 +2,81 @@
 /*
 Plugin Name: EleDocs
 Plugin URI: https://w4dev.com/
-Description: Use elementor to manage wedocs frontend.
+Description: Use Elementor Pro to modify WeDocs frontend.
 Version: 1.0.0
 Author: Shazzad Hossain Khan
 Author URI: https://shazzad.me/
 License: GPL2
-Text Domain: wdei-elementor
+Text Domain: eledocs
 Domain Path: /languages
 */
 
-// don't call the file directly
+// Don't call the file directly.
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
+// Defined this file as plugin base file.
+if ( ! defined( 'ELEDOCS_PLUGIN_FILE' ) ) {
+	define( 'ELEDOCS_PLUGIN_FILE', __FILE__ );
+}
+
+// Load dependencies.
 require_once __DIR__ . '/vendor/autoload.php';
 
 /**
- * WeDocs Elementor Integration class.
- *
- * @class EleDocs The class that holds the entire WeDocs Elementor Integration plugin
- */
-final class EleDocs {
-
-    /**
-     * Plugin version.
-     *
-     * @var string
-     */
-    const VERSION = '1.0.0';
-
-    /**
-     * The plugin url.
-     *
-     * @var string
-     */
-    public $plugin_url;
-
-    /**
-     * The plugin path.
-     *
-     * @var string
-     */
-    public $plugin_path;
-
-    /**
-     * Holds various class instances
-     *
-     * @var array
-     */
-    private $container = [];
-
-    /**
-     * Class construcotr
-     */
-    private function __construct() {
-        $this->define_constants();
-        $this->init_actions();
-
-        add_action( 'after_setup_theme', [ $this, 'init_classes' ] );
-    }
-
-
-    /**
-     * Initializes the EleDocs() class.
-     *
-     * Checks for an existing EleDocs() instance
-     * and if it doesn't find one, creates it.
-     */
-    public static function init() {
-        static $instance = false;
-
-        if ( ! $instance ) {
-            $instance = new EleDocs();
-        }
-
-        return $instance;
-    }
-
-    /**
-     * Define the required plugin constants
-     *
-     * @return void
-     */
-    public function define_constants() {
-        define( 'WDEI_VERSION', self::VERSION );
-        define( 'WDEI_FILE', __FILE__ );
-        define( 'WDEI_PATH', __DIR__ );
-        define( 'WDEI_URL', plugins_url( '', WDEI_FILE ) );
-        define( 'WDEI_ASSETS', WDEI_URL . '/assets' );
-    }
-
-    /**
-     * Magic getter to bypass referencing plugin.
-     *
-     * @param $prop
-     *
-     * @return mixed
-     */
-    public function __get( $prop ) {
-        if ( array_key_exists( $prop, $this->container ) ) {
-            return $this->container[ $prop ];
-        }
-
-        return $this->{$prop};
-    }
-
-    /**
-     * Initialize the plugin.
-     *
-     * @return void
-     */
-    public function init_actions() {
-        // Localize our plugin
-        add_action( 'init', [ $this, 'localization_setup' ] );
-    }
-
-    /**
-     * Initialize the classes.
-     *
-     * @since 1.4
-     *
-     * @return void
-     */
-    public function init_classes() {
-		$this->container['elementor'] = new EleDocs\Elementor();
-        if ( ! is_admin() ) {
-            $this->container['frontend'] = new EleDocs\Frontend();
-        }
-    }
-
-    /**
-     * Initialize plugin for localization.
-     *
-     * @uses load_plugin_textdomain()
-     */
-    public function localization_setup() {
-        load_plugin_textdomain( 'wdei', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
-    }
-
-    /**
-     * Get the plugin url.
-     *
-     * @return string
-     */
-    public function plugin_url() {
-        if ( $this->plugin_url ) {
-            return $this->plugin_url;
-        }
-
-        return $this->plugin_url = untrailingslashit( plugins_url( '/', __FILE__ ) );
-    }
-
-    /**
-     * Get the plugin path.
-     *
-     * @return string
-     */
-    public function plugin_path() {
-        if ( $this->plugin_path ) {
-            return $this->plugin_path;
-        }
-
-        return $this->plugin_path = untrailingslashit( plugin_dir_path( __FILE__ ) );
-    }
-
-    /**
-     * Get the template path.
-     *
-     * @return string
-     */
-    public function template_path() {
-        return $this->plugin_path() . '/templates/';
-    }
-
-} // EleDocs
-
-/**
- * Initialize the plugin.
+ * Get Plugin Instance.
  *
  * @return \EleDocs
  */
-function wedocs_elementor_integration() {
-    return EleDocs::init();
+function eledocs() {
+    return \EleDocs\Plugin::init();
 }
 
-// kick it off
-wedocs_elementor_integration();
+/**
+* Show in WP Dashboard notice about wedocs requirement.
+ *
+ * @return void
+ */
+function eledocs_notice_missing_wedocs() {
+	if ( ! current_user_can( 'install_plugins' ) ) {
+		return;
+	}
+
+	echo '<div class="error"><p>' . __( 'EleDocs is not working because you need to activate the WeDocs plugin.', 'eledocs' ) . '</p></div>';
+}
+
+/**
+ * Show in WP Dashboard notice about elementor pro requirement.
+ *
+ * @return void
+ */
+function eledocs_notice_missing_elementor_pro() {
+	if ( ! current_user_can( 'install_plugins' ) ) {
+		return;
+	}
+
+	echo '<div class="error"><p>' . __( 'EleDocs is not working because you need to activate the Elementor Pro plugin.', 'eledocs' ) . '</p></div>';
+}
+
+/**
+ * Kickoff the plugin or display admin notice if dependencies unavailable.
+ *
+ * @return void
+ */
+function eledocs_load_plugin() {
+	if ( ! defined( 'WEDOCS_VERSION' ) ) {
+		add_action( 'admin_notices', 'eledocs_notice_missing_wedocs' );
+		return;
+	}
+
+	if ( ! defined( 'ELEMENTOR_PRO_VERSION' ) ) {
+		add_action( 'admin_notices', 'eledocs_notice_missing_elementor_pro' );
+		return;
+	}
+
+	// Kick.
+	eledocs();
+}
+
+add_action( 'plugins_loaded', 'eledocs_load_plugin' );

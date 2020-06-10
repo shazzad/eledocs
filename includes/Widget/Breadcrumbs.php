@@ -22,7 +22,7 @@ class Breadcrumbs extends Widget_Base {
 	}
 
 	public function get_keywords() {
-		return [ 'wedocs', 'breadcrumbs' ];
+		return [ 'wedocs', 'eledocs', 'breadcrumbs' ];
 	}
 
 	protected function render() {

@@ -27,7 +27,7 @@ class Article_Sidebar extends Widget_Base {
 	}
 
 	public function get_keywords() {
-		return [ 'wedocs', 'sidebar' ];
+		return [ 'wedocs', 'eledocs', 'sidebar' ];
 	}
 
 	protected function _register_controls() {

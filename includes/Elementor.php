@@ -22,16 +22,43 @@ class Elementor {
 		add_action( 'elementor/frontend/after_register_scripts', [ $this, 'widget_scripts' ] );
 
 		// register dynamic tags
-		add_action( 'elementor/dynamic_tags/register_tags', [ $this, 'register_tags' ] );
+		add_action( 'elementor/dynamic_tags/register_tags', [ $this, 'register_dynamic_tags' ] );
+
+		add_action( 'elementor/documents/register', [ $this, 'register_documents' ] );
+
+		add_filter( 'elementor/theme/need_override_location', [ $this, 'theme_template_include' ], 20, 2 );
+
+		add_action( 'elementor/theme/register_conditions', [ $this, 'register_conditions' ] );
     }
 
-	public function register_tags( $dynamic_tags ) {
+	/**
+	 * @param Conditions_Manager $conditions_manager
+	 */
+	public function register_conditions( $conditions_manager ) {
+		$docs_condition = new Condition\Docs();
+
+		$conditions_manager->get_condition( 'general' )->register_sub_condition( $docs_condition );
+	}
+
+	public function theme_template_include( $need_override_location, $location ) {
+		if ( is_singular( 'docs' ) && 'single' === $location ) {
+			$need_override_location = true;
+		}
+
+		return $need_override_location;
+	}
+
+	public function register_documents( $documents_manager ) {
+		$documents_manager->register_document_type( 'docs', Document\Doc::get_class_full_name() );
+	}
+
+	public function register_dynamic_tags( $dynamic_tags ) {
 		\Elementor\Plugin::$instance->dynamic_tags->register_group(
 			'eledocs', [
 				'title' => 'EleDocs'
 			]
 		);
-		$dynamic_tags->register_tag( 'EleDocs\DynamicTag\Doc_Title' );
+		$dynamic_tags->register_tag( '\EleDocs\DynamicTag\Doc_Title' );
 	}
 
 	/**
@@ -47,16 +74,16 @@ class Elementor {
         // All styles goes here
         wp_enqueue_style(
 			'eledocs-widgets',
-			WDEI_ASSETS . '/css/widgets.css',
+			ELEDOCS_ASSETS . '/css/widgets.css',
 			[],
-			filemtime( WDEI_PATH . '/assets/css/widgets.css' )
+			filemtime( ELEDOCS_PATH . '/assets/css/widgets.css' )
 		);
 
 		wp_register_script(
 			'eledocs-widgets',
-			WDEI_ASSETS . '/js/widgets.js',
+			ELEDOCS_ASSETS . '/js/widgets.js',
 			[ 'jquery' ],
-			filemtime( WDEI_PATH . '/assets/js/widgets.js' ),
+			filemtime( ELEDOCS_PATH . '/assets/js/widgets.js' ),
 			true
 		);
 
@@ -79,10 +106,34 @@ class Elementor {
 		$elements_manager->add_category(
 			'eledocs',
 			[
-				'title' => __( 'WeDocs', 'eledocs' ),
+				'title' => __( 'EleDocs', 'eledocs' ),
 				'icon' => 'fa fa-plug',
 			]
 		);
+		/*
+		global $post;
+
+		if ( isset( $post->ID )
+			&& 'single' === get_post_meta( $post->ID, '_elementor_template_type', true )
+		 	&& 'docs' === get_post_meta( $post->ID, '_elementor_template_sub_type', true ) ) {
+
+			$elements_manager->add_category(
+				'eledocs',
+				[
+					'title' => __( 'EleDocs', 'eledocs' ),
+					'icon' => 'fa fa-plug',
+					'active' => true,
+				]
+			);
+		} else {
+			$elements_manager->add_category(
+				'eledocs',
+				[
+					'title' => __( 'EleDocs', 'eledocs' ),
+					'icon' => 'fa fa-plug',
+				]
+			);
+		}*/
 	}
 
     /**

@@ -20,7 +20,7 @@ class Sections extends Parent_Child_Grid {
 	}
 
 	public function get_keywords() {
-		return [ 'wedocs', 'sections' ];
+		return [ 'wedocs', 'eledocs', 'section' ];
 	}
 
 	protected function get_control_label( $key ) {

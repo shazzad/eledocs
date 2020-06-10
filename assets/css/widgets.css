@@ -12,6 +12,9 @@
 .eledocs-search-form .search-field-wrap{
 	flex-grow: 1;
 }
+.eledocs-search-form .search-field-wrap input{
+	width: 100%;
+}
 .eledocs-search-doc .results-wrap {
     left: 0;
     top: 100%;
