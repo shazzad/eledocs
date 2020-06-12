@@ -3,14 +3,14 @@ namespace EleDocs\Widget;
 
 use \Elementor\Widget_Base;
 
-class Single_Doc_Children extends Widget_Base {
+class Children extends Widget_Base {
 
 	public function get_name() {
-		return 'eledocs-single-doc-children';
+		return 'eledocs-children';
 	}
 
 	public function get_title() {
-		return __( 'Single Doc Children', 'plugin-name' );
+		return __( 'Children', 'plugin-name' );
 	}
 
 	public function get_icon() {
@@ -31,19 +31,23 @@ class Single_Doc_Children extends Widget_Base {
 		$this->add_render_attribute(
 			'wrapper',
 			'class',
-			'eledocs-single-doc-children-container'
+			'eledocs-children-container'
 		);
 
-		$children = wp_list_pages( 'title_li=&order=menu_order&parent=' . $post->ID . '&echo=0&post_type=' . $post->post_type );
+		$children = wp_list_pages( array(
+			'title_li'  => '',
+			'order'     => 'menu_order',
+			'parent'    => $post->ID,
+			'echo'      => 0,
+			'post_type' => 'docs'
+		) );
 
 		if ( $children ) {
 			?>
 			<div <?php echo $this->get_render_attribute_string( 'wrapper' ); ?>>
-				<div class="article-child well">
-					<ul>
-						<?php echo $children; ?>
-					</ul>
-				</div>
+				<ul>
+					<?php echo $children; ?>
+				</ul>
 			</div>
 			<?php
 		}

@@ -13,11 +13,11 @@ class Doc extends ThemeBuilder\Conditions\Condition_Base {
 	private $post_type = 'docs';
 
 	public static function get_type() {
-		return 'doc';
+		return 'eledocs_doc';
 	}
 
 	public function get_name() {
-		return 'doc';
+		return 'eledocs_doc';
 	}
 
 	public static function get_priority() {
@@ -25,15 +25,14 @@ class Doc extends ThemeBuilder\Conditions\Condition_Base {
 	}
 
 	public function get_label() {
-		return __( 'Choose', 'elementor-pro' );
+		return __( 'Doc', 'eledocs' );
 	}
 
 	public function get_all_label() {
-		return __( 'Single Doc', 'elementor-pro' );
+		return __( 'All Doc', 'eledocs' );
 	}
 
 	public function register_sub_conditions() {
-
 		$doc_single = new ThemeBuilder\Conditions\Post( [
 			'post_type' => $this->post_type,
 			'post_parent' => 0

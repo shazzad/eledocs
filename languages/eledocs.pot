@@ -1,0 +1,227 @@
+# Copyright (C) 2020 Shazzad Hossain Khan
+# This file is distributed under the same license as the EleDocs plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: EleDocs 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/eledocs\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2020-06-11T19:05:44+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.4.0\n"
+"X-Domain: eledocs\n"
+
+#. Plugin Name of the plugin
+#: includes/Elementor.php:110
+msgid "EleDocs"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://w4dev.com/"
+msgstr ""
+
+#. Description of the plugin
+msgid "Use Elementor Pro to modify WeDocs frontend."
+msgstr ""
+
+#. Author of the plugin
+msgid "Shazzad Hossain Khan"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://shazzad.me/"
+msgstr ""
+
+#: eledocs.php:46
+msgid "EleDocs is not working because you need to activate the WeDocs plugin."
+msgstr ""
+
+#: eledocs.php:59
+msgid "EleDocs is not working because you need to activate the Elementor Pro plugin."
+msgstr ""
+
+#: includes/Condition/Doc.php:28
+#: includes/Widget/Docs.php:31
+msgid "Doc"
+msgstr ""
+
+#: includes/Condition/Doc.php:32
+msgid "All Doc"
+msgstr ""
+
+#: includes/Condition/Section.php:40
+#: includes/Widget/Docs.php:34
+#: includes/Widget/Sections.php:31
+msgid "Section"
+msgstr ""
+
+#: includes/Condition/Section.php:44
+msgid "All Section"
+msgstr ""
+
+#: includes/DynamicTag/Doc_Title.php:15
+#: includes/Widget/Docs.php:32
+msgid "Doc Title"
+msgstr ""
+
+#: includes/Elementor.php:93
+msgid "Please enter something"
+msgstr ""
+
+#: includes/Elementor.php:94
+msgid "Nothing found! Try with another keyword!"
+msgstr ""
+
+#: includes/Elementor.php:95
+msgid "Loading results, please wait."
+msgstr ""
+
+#: includes/Widget/Breadcrumbs.php:13
+msgid "Docs Breadcrumbs"
+msgstr ""
+
+#: includes/Widget/Docs.php:11
+#: includes/Widget/Docs.php:30
+msgid "Docs"
+msgstr ""
+
+#: includes/Widget/Docs.php:28
+msgid "Show Sections?"
+msgstr ""
+
+#: includes/Widget/Docs.php:29
+msgid "Sections per Doc?"
+msgstr ""
+
+#: includes/Widget/Docs.php:33
+#: includes/Widget/Sections.php:11
+#: includes/Widget/Sections.php:30
+msgid "Sections"
+msgstr ""
+
+#: includes/Widget/Docs.php:41
+#: includes/Widget/Docs.php:53
+#: includes/Widget/Sections.php:41
+#: includes/Widget/Sections.php:53
+msgid "Nothing"
+msgstr ""
+
+#: includes/Widget/Docs.php:46
+msgid "Number of Sections to display per Doc?"
+msgstr ""
+
+#: includes/Widget/Parent_Child_Grid.php:38
+#: includes/Widget/Parent_Child_Grid.php:63
+#: includes/Widget/Search_Doc.php:47
+msgid "Show"
+msgstr ""
+
+#: includes/Widget/Parent_Child_Grid.php:39
+#: includes/Widget/Parent_Child_Grid.php:64
+#: includes/Widget/Search_Doc.php:48
+msgid "Hide"
+msgstr ""
+
+#: includes/Widget/Parent_Child_Grid.php:61
+msgid "Show More Button?"
+msgstr ""
+
+#: includes/Widget/Parent_Child_Grid.php:76
+msgid "More Button Text"
+msgstr ""
+
+#: includes/Widget/Parent_Child_Grid.php:78
+msgid "Show Details"
+msgstr ""
+
+#: includes/Widget/Parent_Child_Grid.php:126
+#: includes/Widget/Parent_Child_Grid.php:163
+msgid "Column Size"
+msgstr ""
+
+#: includes/Widget/Parent_Child_Grid.php:146
+msgid "Column Gap"
+msgstr ""
+
+#: includes/Widget/Parent_Child_Grid.php:168
+msgid "Five"
+msgstr ""
+
+#: includes/Widget/Parent_Child_Grid.php:169
+msgid "Four"
+msgstr ""
+
+#: includes/Widget/Parent_Child_Grid.php:170
+msgid "Three"
+msgstr ""
+
+#: includes/Widget/Parent_Child_Grid.php:171
+msgid "Two"
+msgstr ""
+
+#: includes/Widget/Parent_Child_Grid.php:172
+msgid "One"
+msgstr ""
+
+#: includes/Widget/Parent_Child_Grid.php:324
+msgid "Minimum Height"
+msgstr ""
+
+#: includes/Widget/Search_Doc.php:14
+msgid "Search Doc"
+msgstr ""
+
+#: includes/Widget/Search_Doc.php:45
+msgid "Show Docs Dropdown?"
+msgstr ""
+
+#: includes/Widget/Search_Doc.php:57
+msgid "Docs Dropdown Label"
+msgstr ""
+
+#: includes/Widget/Search_Doc.php:59
+msgid "All Docs"
+msgstr ""
+
+#: includes/Widget/Search_Doc.php:70
+msgid "Search Placeholder Text"
+msgstr ""
+
+#: includes/Widget/Search_Doc.php:72
+msgid "Documentation Search &hellip;"
+msgstr ""
+
+#: includes/Widget/Search_Doc.php:80
+msgid "Search Button Text"
+msgstr ""
+
+#: includes/Widget/Search_Doc.php:82
+msgid "Search"
+msgstr ""
+
+#: includes/Widget/Sections.php:28
+msgid "Show Articles?"
+msgstr ""
+
+#: includes/Widget/Sections.php:29
+msgid "Articles per Section?"
+msgstr ""
+
+#: includes/Widget/Sections.php:32
+msgid "Section Title"
+msgstr ""
+
+#: includes/Widget/Sections.php:33
+msgid "Articles"
+msgstr ""
+
+#: includes/Widget/Sections.php:34
+msgid "Article"
+msgstr ""
+
+#: includes/Widget/Sections.php:46
+msgid "Number of Articles to display per Section?"
+msgstr ""

@@ -8,29 +8,49 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-class Docs extends ThemeBuilder\Conditions\Condition_Base {
+class Section extends ThemeBuilder\Conditions\Condition_Base {
 
 	private $post_type = 'docs';
+	private $doc_ids;
+
+	public function __construct( array $data = [] ) {
+		$this->doc_ids = get_posts( [
+            'post_type'   => $this->post_type,
+            'post_parent' => 0,
+			'post_status' => 'publish',
+			'fields'      => 'ids',
+        ] );
+
+		parent::__construct( $data );
+	}
 
 	public static function get_type() {
-		return 'all_docs';
+		return 'eledocs_section';
 	}
 
 	public function get_name() {
-		return $this->post_type;
+		return 'eledocs_section';
+	}
+
+	public static function get_priority() {
+		return 30;
 	}
 
 	public function get_label() {
-		return __( 'Doc / Section / Article', 'elementor-pro' );
+		return __( 'Section', 'eledocs' );
 	}
 
 	public function get_all_label() {
-		return __( 'All Doc / Section / Article', 'elementor-pro' );
+		return __( 'All Section', 'eledocs' );
 	}
 
 	public function register_sub_conditions() {
-		$section = new Doc();
-		$this->register_sub_condition( $section );
+		$doc_single = new ThemeBuilder\Conditions\Post( [
+			'post_type' => $this->post_type,
+			'post_parent__in' => $this->doc_ids
+		] );
+
+		$this->register_sub_condition( $doc_single );
 	}
 
 	protected function _register_controls() {
@@ -45,7 +65,8 @@ class Docs extends ThemeBuilder\Conditions\Condition_Base {
 				'autocomplete' => [
 					'object' => QueryModule::QUERY_OBJECT_POST,
 					'query' => [
-						'post_type' => $this->get_name(),
+						'post_type' => $this->post_type,
+						'post_parent__in' => $this->doc_ids
 					],
 				],
 			]
@@ -60,6 +81,6 @@ class Docs extends ThemeBuilder\Conditions\Condition_Base {
 			}
 		}
 
-		return is_singular( 'docs' );
+		return is_singular( 'docs' ) && in_array( wp_get_post_parent_id( get_post() ), $this->doc_ids );
 	}
 }

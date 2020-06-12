@@ -24,10 +24,7 @@ class Elementor {
 		// register dynamic tags
 		add_action( 'elementor/dynamic_tags/register_tags', [ $this, 'register_dynamic_tags' ] );
 
-		add_action( 'elementor/documents/register', [ $this, 'register_documents' ] );
-
-		add_filter( 'elementor/theme/need_override_location', [ $this, 'theme_template_include' ], 20, 2 );
-
+		// register template display conditions
 		add_action( 'elementor/theme/register_conditions', [ $this, 'register_conditions' ] );
     }
 
@@ -35,21 +32,11 @@ class Elementor {
 	 * @param Conditions_Manager $conditions_manager
 	 */
 	public function register_conditions( $conditions_manager ) {
-		$docs_condition = new Condition\Docs();
+		$doc = new Condition\Doc();
+		$section = new Condition\Section();
 
-		$conditions_manager->get_condition( 'general' )->register_sub_condition( $docs_condition );
-	}
-
-	public function theme_template_include( $need_override_location, $location ) {
-		if ( is_singular( 'docs' ) && 'single' === $location ) {
-			$need_override_location = true;
-		}
-
-		return $need_override_location;
-	}
-
-	public function register_documents( $documents_manager ) {
-		$documents_manager->register_document_type( 'docs', Document\Doc::get_class_full_name() );
+		$conditions_manager->get_condition( 'docs' )->register_sub_condition( $doc );
+		$conditions_manager->get_condition( 'docs' )->register_sub_condition( $section );
 	}
 
 	public function register_dynamic_tags( $dynamic_tags ) {
@@ -110,30 +97,6 @@ class Elementor {
 				'icon' => 'fa fa-plug',
 			]
 		);
-		/*
-		global $post;
-
-		if ( isset( $post->ID )
-			&& 'single' === get_post_meta( $post->ID, '_elementor_template_type', true )
-		 	&& 'docs' === get_post_meta( $post->ID, '_elementor_template_sub_type', true ) ) {
-
-			$elements_manager->add_category(
-				'eledocs',
-				[
-					'title' => __( 'EleDocs', 'eledocs' ),
-					'icon' => 'fa fa-plug',
-					'active' => true,
-				]
-			);
-		} else {
-			$elements_manager->add_category(
-				'eledocs',
-				[
-					'title' => __( 'EleDocs', 'eledocs' ),
-					'icon' => 'fa fa-plug',
-				]
-			);
-		}*/
 	}
 
     /**
@@ -147,6 +110,6 @@ class Elementor {
 		$widgets_manager->register_widget_type( new Widget\Docs() );
 		$widgets_manager->register_widget_type( new Widget\Sections() );
 		$widgets_manager->register_widget_type( new Widget\Article_Sidebar() );
-		$widgets_manager->register_widget_type( new Widget\Single_Doc_Children() );
+		$widgets_manager->register_widget_type( new Widget\Children() );
     }
 }
