@@ -36,20 +36,13 @@ final class Plugin {
     public $plugin_path;
 
     /**
-     * Holds various class instances
-     *
-     * @var array
-     */
-    private $container = [];
-
-    /**
      * Class construcotr
      */
     private function __construct() {
         $this->define_constants();
 
-		$this->init_actions();
-        add_action( 'after_setup_theme', [ $this, 'init_classes' ] );
+		add_action( 'init', [ $this, 'localization_setup' ] );
+        add_action( 'after_setup_theme', [ $this, 'initialize' ] );
     }
 
     /**
@@ -81,41 +74,12 @@ final class Plugin {
     }
 
     /**
-     * Magic getter to bypass referencing plugin.
-     *
-     * @param $prop
-     *
-     * @return mixed
+     * Initialize.
      */
-    public function __get( $prop ) {
-        if ( array_key_exists( $prop, $this->container ) ) {
-            return $this->container[ $prop ];
-        }
-
-        return $this->{$prop};
-    }
-
-    /**
-     * Initialize the plugin.
-     *
-     * @return void
-     */
-    public function init_actions() {
-        // Localize our plugin
-        add_action( 'init', [ $this, 'localization_setup' ] );
-    }
-
-    /**
-     * Initialize the classes.
-     *
-     * @since 1.4
-     *
-     * @return void
-     */
-    public function init_classes() {
-		$this->container['elementor'] = new Elementor();
+    public function initialize() {
+		new Elementor();
         if ( ! is_admin() ) {
-            $this->container['frontend'] = new Frontend();
+           new Frontend();
         }
     }
 
